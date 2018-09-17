@@ -1,0 +1,40 @@
+js_meme_home:
+    path: /{page}
+    controller: JSMemeBundle:Meme:index
+    defaults:
+        page: 1
+    requirements:
+        page: \d+
+
+js_meme_view:
+    path: /meme/{id}
+    defaults:
+        _controller: JSMemeBundle:Meme:view
+    requirements:
+        id: \d+
+
+js_meme_add:
+    path: /meme/add
+    defaults:
+        _controller: JSMemeBundle:Meme:add
+    requirements:
+        id: \d+
+
+js_meme_delete:
+    path: /meme/delete/{id}
+    defaults:
+        _controller: JSMemeBundle:Meme:delete
+    requirements:
+        id: \d+
+
+js_score_ajax_increment:
+    path: /score/increment
+    methods: [post]
+    defaults:
+        _controller: JSMemeBundle:Score:increment
+
+js_score_ajax_decrement:
+    path: /score/decrement
+    methods: [post]
+    defaults:
+        _controller: JSMemeBundle:Score:decrement

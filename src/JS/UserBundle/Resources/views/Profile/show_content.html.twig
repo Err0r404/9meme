@@ -1,0 +1,78 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<section class="my-3">
+    <div class="row my-3">
+        <div class="col-2">
+            <img class="img-fluid" src="{{ asset('images/users/_default_black.png') }}" alt="Default user logo">
+        </div>
+
+        <div class="col">
+            <p class="h3 mb-1 font-weight-normal">{{ user.username }}</p>
+            <p class="text-muted">Something funny...</p>
+        </div>
+    </div>
+
+    {#<pre>{{ dump(user) }}</pre>#}
+
+    {# Tabs #}
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-posts-tab" data-toggle="pill" href="#pills-posts-content" role="tab" aria-controls="pills-posts" aria-selected="true">
+                Posts
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-upvotes-tab" data-toggle="pill" href="#pills-upvotes-content" role="tab" aria-controls="pills-upvotes" aria-selected="false">
+                Upvotes
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-comments-tab" data-toggle="pill" href="#pills-comments-content" role="tab" aria-controls="pills-comments" aria-selected="false">
+                Comments
+            </a>
+        </li>
+    </ul>
+
+    {# Tabs' content #}
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane show active" id="pills-posts-content" role="tabpanel" aria-labelledby="pills-posts-tab">
+            {% if memes is defined and memes|length > 0 %}
+                {% for meme in memes %}
+                    <div class="my-3">
+                        {% include '@JSMeme/Meme/list_item.html.twig' with {'meme': meme} %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    No post yet
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="tab-pane" id="pills-upvotes-content" role="tabpanel" aria-labelledby="pills-upvotes-tab">
+            {% if upvotes is defined and upvotes|length > 0 %}
+                {% for upvote in upvotes %}
+                    <div class="my-3">
+                        {% include '@JSMeme/Meme/list_item.html.twig' with {'meme': upvote} %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    No upvote yet
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="tab-pane" id="pills-comments-content" role="tabpanel" aria-labelledby="pills-comments-tab">
+            {% if comments is defined %}
+                {% for comment in comments %}
+
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info">
+                    No comment yet
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

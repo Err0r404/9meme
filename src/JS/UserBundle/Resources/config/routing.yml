@@ -1,0 +1,3 @@
+js_user_profile:
+    path: /{usernameCanonical}
+    controller: JSUserBundle:User:profile

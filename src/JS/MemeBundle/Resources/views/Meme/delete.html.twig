@@ -1,0 +1,32 @@
+{% extends '@JSMeme/layout.html.twig' %}
+
+{% block title %} {{ parent() }}: Delete meme "{{ meme.title }}" {% endblock %}
+
+{% block body %}
+    <section class="my-3">
+        <p class="h3 mb-2 font-weight-normal">
+            Delete a meme <br>
+            <small class="text-muted">{{ meme.title }}</small>
+        </p>
+
+        <p class="lead my-3">
+            Are you sure you want to delete your meme? <br>
+            This action cannot be undone
+        </p>
+
+        <form action="{{ path('js_meme_delete', {'id': meme.id}) }}" method="post">
+
+            {{ form_rest(form) }}
+
+            <a href="{{ path('js_meme_view', {'id': meme.id}) }}" class="btn btn-secondary">
+                <i class='bx bx-undo'></i>
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-danger">
+                <i class='bx bx-trash'></i>
+                Yes, delete it
+            </button>
+        </form>
+    </section>
+{% endblock %}

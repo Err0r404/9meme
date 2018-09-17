@@ -1,0 +1,16 @@
+.crop-container {
+    /* height must be set manually */
+    overflow: hidden;
+    position: relative;
+}
+
+.crop-image {
+    position: absolute;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+}

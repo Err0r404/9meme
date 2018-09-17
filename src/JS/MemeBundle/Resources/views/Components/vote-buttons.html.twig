@@ -1,0 +1,22 @@
+{% set upvoteClass = '' %}
+{% set downvoteClass = '' %}
+
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {% if userScore is not null and userScore.user.id is same as (app.user.id) %}
+        {% if userScore.point > 0 %}
+            {% set upvoteClass = 'active' %}
+        {% elseif userScore.point < 0 %}
+            {% set downvoteClass = 'active' %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+<div class="btn-group btn-group" role="group" aria-label="vote">
+    <button type="button" class="btn btn-outline-secondary upvote-btn {{ upvoteClass }}" data-csrf="{{ csrf_token(meme.id) }}" data-meme="{{ meme.id }}">
+        <i class='bx bxs-upvote'></i>
+    </button>
+
+    <button type="button" class="btn btn-outline-secondary downvote-btn {{ downvoteClass }}" data-csrf="{{ csrf_token(meme.id) }}" data-meme="{{ meme.id }}">
+        <i class='bx bxs-downvote'></i>
+    </button>
+</div>

@@ -1,0 +1,13 @@
+{% extends "@JSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% include "@JSUser/Profile/show_content.html.twig" %}
+{% endblock fos_user_content %}
+
+{% block scripts %}
+    <script>
+        var incrementAjaxUrl = '{{ path('js_score_ajax_increment') }}';
+        var decrementAjaxUrl = '{{ path('js_score_ajax_decrement') }}';
+    </script>
+    <script src="{{ asset('js/components/vote-buttons.js') }}"></script>
+{% endblock %}

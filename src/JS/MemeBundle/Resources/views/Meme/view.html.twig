@@ -1,0 +1,148 @@
+{% extends '@JSMeme/layout.html.twig' %}
+
+{% block title %} {{ parent() }}: {{ meme.title }} {% endblock %}
+
+{% block body %}
+    <section class="my-3">
+        <div class="my-3">
+            <p class="h3 mb-2 font-weight-normal">
+                <a href="{{ path('js_meme_view', {id: meme.id}) }}" class="text-dark">{{ meme.title }}</a>
+            </p>
+
+            <div class="text-center">
+                <img class="img-fluid d-block mb-1" src="{{ vich_uploader_asset(meme, 'file') }}" alt="{{ meme.title }}"/>
+            </div>
+
+            {# [START] Category & Title #}
+            <div class="row">
+                <div class="col">
+                    <span class="badge badge-primary">{{ meme.category.title }}</span>
+                </div>
+                <div class="col text-right">
+                    By:
+                    <a href="{{ path('js_user_profile', {'usernameCanonical': meme.user.usernameCanonical}) }}" class="font-weight-bold text-dark">
+                        {{ meme.user.username }}
+                    </a>
+                </div>
+            </div>
+            {# [END] Category & Title #}
+
+            {# [START] Points, Comments & Delete #}
+            <div class="row">
+                <div class="col">
+                    <p class="text-muted mb-2">
+                        <a href="{{ path('js_meme_view', {id: meme.id}) }}" class="text-dark mr-1">
+                            <span class="nb-point" data-meme="{{ meme.id }}">{{ meme.nbPoint }}</span> points
+                        </a>
+                        —
+                        <a href="{{ path('js_meme_view', {id: meme.id}) }}#comments" class="text-dark">
+                            <span class="ml-1">{{ meme.nbComment }} comments</span>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col text-right">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.id is same as (meme.user.id) %}
+                        <a href="{{ path('js_meme_delete', {'id': meme.id}) }}" class="text-danger text-uppercase">
+                            Delete
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            {# [END] Points, Comments & Delete #}
+
+            {# [START] Vote & Share buttons #}
+            <div class="row">
+                <div class="col">
+                    {% include ('@JSMeme/Components/vote-buttons.html.twig') with {'meme': meme, 'userScore': userScore} only %}
+                </div>
+
+                <div class="col text-right">
+                    <div class="btn-group btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-primary">
+                            <i class='bx bxl-facebook'></i> Facebook
+                        </button>
+
+                        <button class="btn btn-outline-secondary dropdown-toggle rounded-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class='bx bx-dots-horizontal-rounded'></i>
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">
+                                <i class='bx bxl-twitter'></i> Twitter
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class='bx bxl-google-plus'></i> Google +
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class='bx bxl-pinterest'></i> Pinterest
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class='bx bx-envelope'></i> Email
+                            </a>
+                            <a class="dropdown-item text-danger" href="#">
+                                <i class='bx bx-error-circle'></i> Report
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# [END] Vote & Share buttons #}
+        </div>
+
+        {# [START] Comments #}
+        <div class="my-5">
+            <p class="lead" id="comments">Comments</p>
+
+            <div class="row my-3">
+                <div class="col-2">
+                    <img class="img-fluid d-block mb-1" src="http://placeholder.pics/svg/256x256/" alt="Empty avatar">
+                </div>
+                <div class="col">
+                    <form action="">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1" class="sr-only">Example textarea</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write a comment"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% for comment in comments %}
+                <div class="row my-4">
+                    <div class="col-2">
+                        <img class="img-fluid d-block mb-1" src="http://placeholder.pics/svg/256x256/" alt="Empty avatar">
+                    </div>
+                    <div class="col">
+                        <span class="h6 mt-0 mb-1">{{ comment.author }}</span>
+                        <small class="float-right text-muted">{{ comment.createdAt|ago }}</small>
+                        <div class="mb-1">
+                            {{ comment.text }}
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <button type="button" class="btn btn-light">
+                                <i class='bx bxs-downvote'></i>
+                            </button>
+                            <button type="button" class="btn btn-light">
+                                <i class='bx bxs-upvote'></i>
+                            </button>
+                            <button type="button" class="btn btn-light">
+                                Reply
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {# [END] Comments #}
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        var incrementAjaxUrl = '{{ path('js_score_ajax_increment') }}';
+        var decrementAjaxUrl = '{{ path('js_score_ajax_decrement') }}';
+    </script>
+    <script src="{{ asset('js/components/vote-buttons.js') }}"></script>
+{% endblock %}

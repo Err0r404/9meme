@@ -1,0 +1,11 @@
+{% for meme in memes %}
+    <section class="mb-5">
+        <a href="{{ path('js_meme_view', {id: meme.id}) }}" class="mb-1">
+            <img class="img-fluid d-block mb-1" src="{{ vich_uploader_asset(meme, 'file') }}" alt="{{ meme.title }}" style="height: 125px; width: 100%; object-fit: cover"/>
+        </a>
+
+        <p class="mb-0">
+            <a href="{{ path('js_meme_view', {id: meme.id}) }}" class="text-dark">{{ meme.title }}</a>
+        </p>
+    </section>
+{% endfor %}

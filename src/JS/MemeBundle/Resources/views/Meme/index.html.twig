@@ -1,0 +1,25 @@
+{% extends '@JSMeme/layout.html.twig' %}
+
+{% block title %} {{ parent() }}: You want some meme? {% endblock %}
+
+{% block body %}
+    <section class="my-3">
+
+        {% for meme in pagination %}
+            <div class="mb-5">
+                {% include '@JSMeme/Meme/list_item.html.twig' with {'meme': meme} %}
+            </div>
+        {% endfor %}
+
+        {# Template defined in app/config/config.yml #}
+        {{ knp_pagination_render(pagination) }}
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        var incrementAjaxUrl = '{{ path('js_score_ajax_increment') }}';
+        var decrementAjaxUrl = '{{ path('js_score_ajax_decrement') }}';
+    </script>
+    <script src="{{ asset('js/components/vote-buttons.js') }}"></script>
+{% endblock %}

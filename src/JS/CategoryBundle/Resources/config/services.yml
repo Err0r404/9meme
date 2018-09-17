@@ -1,0 +1,4 @@
+services:
+#    js_category.example:
+#        class: JS\CategoryBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('css/core/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/full-height.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/image-crop.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components/footer.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+
+    <link rel="stylesheet" href="{{ asset('css/components/boxicons.min.css') }}">
+
+    <style>
+        #sidebar-left, #sidebar-right{
+            position: sticky;
+            top: 16px; /* regular margin */
+        }
+    </style>
+
+    {% block styles %}
+    {% endblock %}
+
+    <link rel="icon" href="{{ asset('images/symfony_black.png') }}" type="image/png">
+
+    <title>{% block title %}{{ site }}{% endblock %}</title>
+</head>
+<body>
+
+{% include('@JSMeme/navbar.html.twig') %}
+
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {#{{ dump(app) }}#}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <section class="my-3" id="sidebar-left">
+                    {{ render(controller('JSMemeBundle:Meme:popularities')) }}
+
+                    {{ render(controller('JSCategoryBundle:Category:widgetCategories')) }}
+                </section>
+            </div>
+
+            <div class="col">
+                {% block body %}
+                {% endblock %}
+            </div>
+
+            <div class="col-3 offset-1">
+                <section class="my-3" id="sidebar-right">
+                    {{ render(controller('JSMemeBundle:Meme:randomMeme')) }}
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer bg-dark text-light">
+    <div class="container">
+        <p class="text-center mb-0">
+            Made with <span class="text-danger"><i class='bx bxs-heart'></i></span> by Julien
+        </p>
+    </div>
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{{ asset('js/core/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('js/core/popper.min.js') }}"></script>
+<script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('js/components/common.js') }}"></script>
+
+{% block scripts %}
+{% endblock %}
+</body>
+</html>

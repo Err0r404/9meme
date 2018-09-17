@@ -1,0 +1,21 @@
+{% extends "@JSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% include "@JSUser/Registration/register_content.html.twig" %}
+{% endblock fos_user_content %}
+
+
+{% form_theme form _self %}
+
+{# form_errors.html.twig #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul class="list-unstyled mb-0">
+                {% for error in errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

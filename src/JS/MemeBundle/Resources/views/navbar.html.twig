@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('js_meme_home') }}">
+            <img src="{{ asset('images/symfony_white.png') }}" width="30" height="30" class="d-inline-block align-top" alt="9meme logo">
+            9meme
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            {# Useful links #}
+            {#<ul class="navbar-nav mr-auto mt-2 mt-lg-0">#}
+                {#<li class="nav-item {{ app.request.pathinfo is same as('/meme/add') ? 'active' : '' }}">#}
+                    {#<a class="nav-link" href="{{ path('js_meme_add') }}">Add</a>#}
+                {#</li>#}
+            {#</ul>#}
+
+            {# User #}
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+                {# Logged in user #}
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbar-logged-in-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ app.user.username }}
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbar-logged-in-dropdown">
+                            {#<a class="dropdown-item" href="{{ path('fos_user_profile_show') }}">#}
+                            <a class="dropdown-item" href="{{ path('js_user_profile', {"usernameCanonical": app.user.usernameCanonical}) }}">
+                            {#<a class="dropdown-item" href="#">#}
+                                <i class='bx bx-user mr-1'></i>
+                                Profile
+                            </a>
+
+                            <a class="dropdown-item" href="{{ path('fos_user_profile_edit') }}">
+                                <i class='bx bx-slider-alt mr-1'></i>
+                                Settings
+                            </a>
+
+                            <a class="dropdown-item" href="{{ path('fos_user_change_password') }}">
+                                <i class='bx bx-lock mr-1'></i>
+                                Password
+                            </a>
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('admin') }}" target="_blank">
+                                    <i class='bx bx-cog mr-1'></i>
+                                    Administration
+                                </a>
+                            {% endif %}
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="{{ path('fos_user_security_logout') }}">
+                                <i class='bx bx-log-out mr-1'></i>
+                                Logout
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item {{ app.request.pathinfo is same as('/meme/add') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('js_meme_add') }}">Add</a>
+                    </li>
+
+                {% endif %}
+
+                {# Anonymous user #}
+                {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {# Login #}
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="{{ path('fos_user_security_login') }}">
+                            Sign in
+                        </a>
+                    </li>
+
+                    {# Register #}
+                    <li class="nav-item">
+                        <a href="{{ path('fos_user_registration_register') }}" class="-nav-link btn btn-outline-light" role="button">
+                            Sign up
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
