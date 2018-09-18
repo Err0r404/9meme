@@ -22,12 +22,12 @@
 <div class="row">
     <div class="col">
         <p class="text-muted mb-2">
-            <a href="{{ path('js_meme_view', {id: meme.id}) }}" class="text-dark">
-                <span class="mr-1">{{ meme.nbPoint }} points</span>
+            <a href="{{ path('js_meme_view', {id: meme.id}) }}" class="text-dark mr-1">
+                <span class="nb-point" data-meme="{{ meme.id }}">{{ meme.nbPoint }}</span> points
             </a>
             —
-            <a href="{{ path('js_meme_view', {id: meme.id}) }}#comments" class="text-dark">
-                <span class="ml-1">{{ meme.nbComment }} comments</span>
+            <a href="{{ path('js_meme_view', {id: meme.id}) }}#comments" class="text-dark ml-1">
+                <span>{{ meme.nbComment }} comments</span>
             </a>
         </p>
     </div>
