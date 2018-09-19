@@ -92,8 +92,16 @@
 
         {# [START] Comments #}
         <div class="my-5">
-            {% include '@FOSComment/Thread/async.html.twig' with {'id': meme.id} %}
+            {#{% include '@FOSComment/Thread/async.html.twig' with {'id': meme.id} %}#}
+
+            {#{{ dump(comments) }}#}
+
+            <div id="fos_comment_thread" data-thread="{{ thread.id }}">
+                {#{% include '@FOSComment/Thread/comments.html.twig' with { 'comments': comments, 'thread': thread } %}#}
+                {% include '@JSMeme/Thread/comments.html.twig' with { 'comments': comments, 'thread': thread } %}
+            </div>
         </div>
+
 {#
         <div class="my-5">
             <p class="lead" id="comments">Comments</p>
@@ -150,4 +158,11 @@
         var decrementAjaxUrl = '{{ path('js_score_ajax_decrement') }}';
     </script>
     <script src="{{ asset('js/components/vote-buttons.js') }}"></script>
-{% endblock %}
+
+    {# jQuery must be available in the page by this time, and make sure javascript block is after
+      <div id="fos_comment_thread"> in the DOM Tree, for example right before </body> tag
+    #}
+    {% javascripts '@FOSCommentBundle/Resources/public/js/comments.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock scripts %}
