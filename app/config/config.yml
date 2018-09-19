@@ -132,6 +132,7 @@ fos_comment:
         model:
             comment: JS\CommentBundle\Entity\Comment
             thread: JS\CommentBundle\Entity\Thread
+            vote: JS\CommentBundle\Entity\Vote
     acl: true
     service:
         acl:
