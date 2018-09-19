@@ -92,6 +92,10 @@
 
         {# [START] Comments #}
         <div class="my-5">
+            {% include '@FOSComment/Thread/async.html.twig' with {'id': 'foo'} %}
+        </div>
+{#
+        <div class="my-5">
             <p class="lead" id="comments">Comments</p>
 
             <div class="row my-3">
@@ -135,6 +139,7 @@
                 </div>
             {% endfor %}
         </div>
+#}
         {# [END] Comments #}
     </section>
 {% endblock %}

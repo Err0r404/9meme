@@ -58,15 +58,10 @@ class MemeController extends Controller {
             ;
         }
 
-        $comments = $em
-            ->getRepository('JSCommentBundle:Comment')
-            ->findBy(['meme' => $meme]);
-        
         return $this->render(
             '@JSMeme/Meme/view.html.twig',
             [
                 'meme' => $meme,
-                'comments' => $comments,
                 'userScore' => $userScore,
             ]
         );

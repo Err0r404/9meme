@@ -17,14 +17,18 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
-            
-            new \Knp\Bundle\TimeBundle\KnpTimeBundle(),
-            new \Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new \Vich\UploaderBundle\VichUploaderBundle(),
-            new \FOS\UserBundle\FOSUserBundle(),
+
+            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
-            
+
             new JS\MemeBundle\JSMemeBundle(),
             new JS\CommentBundle\JSCommentBundle(),
             new JS\CategoryBundle\JSCategoryBundle(),

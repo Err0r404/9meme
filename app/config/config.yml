@@ -126,6 +126,23 @@ fos_user:
         form:
             type: JS\UserBundle\Form\RegistrationFormType
 
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: JS\CommentBundle\Entity\Comment
+            thread: JS\CommentBundle\Entity\Thread
+
+assetic:
+  debug:          '%kernel.debug%'
+  use_controller: '%kernel.debug%'
+  filters:
+    cssrewrite: ~
+#  bundles: [ "FOSCommentBundle" ]
+
+#assetic:
+#    bundles: ['FOSCommentBundle']
+
 easy_admin:
     site_name: '9meme Admin'
 
