@@ -37,3 +37,6 @@ security:
         - { path: ^/meme/add, role: ROLE_USER }
 
         - { path: ^/admin/, role: ROLE_ADMIN }
+
+    acl:
+        connection: default
