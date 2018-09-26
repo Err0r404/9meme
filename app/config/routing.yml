@@ -42,6 +42,7 @@ fos_user_change_password:
 fos_comment_api:
     type: rest
     resource: "@FOSCommentBundle/Resources/config/routing.yml"
+#    resource: "@JSCommentBundle/Resources/config/routing.yml"
     prefix: /comment/
     defaults: { _format: html }
 

@@ -9,8 +9,6 @@
 
 #}
 
-{#<pre>comments.html.twig</pre>#}
-
 {% set depth = depth|default(0) %}
 {% set view = view|default('tree') %}
 
@@ -20,18 +18,20 @@
     {% endif %}
 
     {% if fos_comment_can_edit_thread(thread) %}
-    <div class="fos_comment_thread_commentable">
-        <button data-url="{{ url('fos_comment_edit_thread_commentable', {'id': thread.id, 'value': not thread.commentable}) }}" class="fos_comment_thread_commentable_action">
-            {{ (thread.commentable ? 'fos_comment_thread_close' : 'fos_comment_thread_open') | trans({}, 'FOSCommentBundle') }}
-        </button>
-    </div>
+        <div class="fos_comment_thread_commentable text-right">
+            <button data-url="{{ url('fos_comment_edit_thread_commentable', {'id': thread.id, 'value': not thread.commentable}) }}" class="fos_comment_thread_commentable_action btn btn-danger">
+                <i class='bx bx-x-circle'></i>
+                {{ (thread.commentable ? 'fos_comment_thread_close' : 'fos_comment_thread_open') | trans({}, 'FOSCommentBundle') }}
+            </button>
+        </div>
     {% endif %}
 
     {% set count = thread.numComments %}
-    <h3>{% transchoice count with {'%count%': count} from 'FOSCommentBundle' %}fos_comment_thread_comment_count{% endtranschoice %}</h3>
+    <p class="lead my-1">
+        {% transchoice count with {'%count%': count} from 'FOSCommentBundle' %}fos_comment_thread_comment_count{% endtranschoice %}
+    </p>
 {% endif %}
 
 {% for commentinfo in comments %}
-    {#{% include '@FOSComment/Thread/comment.html.twig' with { 'children': commentinfo.children, 'comment': commentinfo.comment, 'depth': depth, 'view': view } %}#}
     {% include '@JSMeme/Thread/comment.html.twig' with { 'children': commentinfo.children, 'comment': commentinfo.comment, 'depth': depth, 'view': view } %}
 {% endfor %}
