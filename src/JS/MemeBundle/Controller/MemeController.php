@@ -18,7 +18,11 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 class MemeController extends Controller {
     
     public function indexAction(Request $request){
-        $user = $this->getUser();
+        $userId = -1;
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $user = $this->getUser();
+            $userId = $user->getId();
+        }
 
         $paginator  = $this->get('knp_paginator');
 
@@ -26,7 +30,7 @@ class MemeController extends Controller {
             ->getDoctrine()
             ->getManager()
             ->getRepository('JSMemeBundle:Meme')
-            ->getMemesPaginated($paginator, $request, $user->getId());
+            ->getMemesPaginated($paginator, $request, $userId);
         
         return $this->render(
             '@JSMeme/Meme/index.html.twig',
@@ -58,15 +62,15 @@ class MemeController extends Controller {
             ;
         }
 
-        $comments = $em
-            ->getRepository('JSCommentBundle:Comment')
-            ->findBy(['meme' => $meme]);
+//        $comments = $em
+//            ->getRepository('JSCommentBundle:Comment')
+//            ->findBy(['meme' => $meme]);
         
         return $this->render(
             '@JSMeme/Meme/view.html.twig',
             [
                 'meme' => $meme,
-                'comments' => $comments,
+//                'comments' => $comments,
                 'userScore' => $userScore,
             ]
         );

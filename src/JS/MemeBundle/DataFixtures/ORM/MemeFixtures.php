@@ -14,6 +14,8 @@ use JS\MemeBundle\Entity\Score;
 
 class MemeFixtures extends Fixture {
     public function load(ObjectManager $manager) {
+        return;
+
         $faker = Factory::create();
     
         // Vars

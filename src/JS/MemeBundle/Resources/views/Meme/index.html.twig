@@ -4,7 +4,6 @@
 
 {% block body %}
     <section class="my-3">
-
         {% for meme in pagination %}
             <div class="mb-5">
                 {% include '@JSMeme/Meme/list_item.html.twig' with {'meme': meme} %}
